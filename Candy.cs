@@ -73,6 +73,11 @@ namespace SweetTask
         {
             
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $", sugar = {Sugar}";
+        }
     }
 
     enum CandyFilling

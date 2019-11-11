@@ -22,9 +22,9 @@ namespace SweetTask
             }
         }*/
 
-
+        public Guid Id { get; }
         public float Weight { get; }
-        public string Name { get; }
+        public string Name { get; set; }
         public string ManufactureCountry { get; }
         
         public Item(string name, float weight, string country)
@@ -41,6 +41,11 @@ namespace SweetTask
             Name = name;
             Weight = weight;
             ManufactureCountry = country;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} from {ManufactureCountry}, weight = {Weight}";
         }
     }
 }
