@@ -7,9 +7,9 @@ namespace SweetTask
 {
     class SweetBox
     {
+        private IList<Sweet> Sweets { get; set; }
         public Guid Id { get; }
-        public string Name { get; set; }
-        public ICollection<ItemsPack> Items { get; private set; }
+        public string Name { get; }
 
         private SweetBox(string name)
         {
@@ -21,77 +21,93 @@ namespace SweetTask
             //Items = null;
         }
 
-        public SweetBox(string name, params ItemsPack[] packs) : this(name)
+        public SweetBox(string name, params Sweet[] items) : this(name)
         {
-            Items = new List<ItemsPack>(packs); // Array to ICollection
-            //Items.Add(packs[0]);
+            Sweets = new List<Sweet>(items);
         }
 
-        public SweetBox(string name, Item item, int count = 1) : this(name)
+        public SweetBox(string name, Sweet item, int count = 1) : this(name)
         {
-            Items = new List<ItemsPack> { new ItemsPack(item, count) };
+            Sweets = new List<Sweet>();
+            AddItem(item, count);
         }
 
-        public void AddItem(ItemsPack pack)
+        public void AddItem(Sweet item, int count = 1)
         {
-            Items.Add(pack);
-        }
-
-        public void AddItem(Item item, int count = 1)
-        {
-            Items.Add(new ItemsPack(item, count));
-        }
-
-        public void AddRangeItems(params ItemsPack[] packs)
-        {
-            foreach (var pack in packs)
+            if (count < 1)
             {
-                Items.Add(pack);
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                Sweets.Add(item.Clone());
             }
         }
 
-        public void RemoveItem(Item item)
+        public void AddItems(params Sweet[] items)
         {
-            
+            foreach (var item in items)
+            {
+                Sweets.Add(item);
+            }
+        }
+
+        public void RemoveItem(Sweet item)
+        {
+            Sweet element = Sweets.FirstOrDefault((sweet) => sweet.Name == item.Name);
+            if (element != null)
+            {
+                Sweets.Remove(element);
+            }
+        }
+
+        public void RemoveItems(Sweet item)
+        {
+            var items = from sweet in Sweets
+                        where sweet.Name == item.Name
+                        select sweet;
+            Sweets = Sweets.Except(items).ToList();
         }
 
         public float GetWeight()
         {
-            return Items.Aggregate(0f, (total, next) => total += next.GetWeight());
-
-            /*
-            return Items.Aggregate(
-                0f,
-                (total, next) => total += next.GetWeight()
-            );
-            */
+            return Sweets.Aggregate(0f, (total, sweet) => total + sweet.Weight);
         }
 
-        public Item SearchItem(Predicate<Item> predicate)
+        public Sweet SearchItem(Predicate<Sweet> predicate)
         {
-            foreach (var pack in Items)
+            return Sweets.FirstOrDefault((sweet) => predicate(sweet));
+        }
+
+        public Sweet SearchItemBySugar(float min = 0, float max = 100)
+        {
+            return Sweets.FirstOrDefault((sweet) => sweet.Sugar >= min && sweet.Sugar <= max);
+        }
+
+        public IEnumerable<Sweet> SortItems(Predicate<Sweet> predicate)
+        {
+            return from Sweet sweet in Sweets
+                   orderby predicate(sweet)
+                   select sweet;
+        }
+        public IEnumerable<Sweet> SortItems(Predicate<Sweet> predicate, Type type)
+        {
+            return from Sweet sweet in Sweets
+                   where sweet.GetType() == type
+                   orderby predicate(sweet)
+                   select sweet;
+        }
+
+        public string ToPrint()
+        {
+            StringBuilder str = new StringBuilder($"Sweet box {Name} contains:\n");
+            foreach (var sweet in Sweets)
             {
-                if (predicate(pack.Item))
-                {
-                    return pack.Item;
-                }
+                str.AppendLine(sweet.ToPrint());
             }
 
-            return null;
-        }
-
-        public IEnumerable<Item> SortItems(Predicate<Item> predicate)
-        {
-            return from ItemsPack pack in Items
-                   orderby predicate(pack.Item)
-                   select pack.Item;
-        }
-        public IEnumerable<Item> SortItems(Predicate<Item> predicate, Type type)
-        {
-            return from ItemsPack pack in Items
-                   where pack.Item.GetType() == type
-                   orderby predicate(pack.Item)
-                   select pack.Item;
+            return str.ToString();
         }
     }
 }
