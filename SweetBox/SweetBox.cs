@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SweetTask
+namespace SweetTask.Base
 {
-    class SweetBox
+    public class SweetBox
     {
         private IList<Sweet> Sweets { get; set; }
         public Guid Id { get; }

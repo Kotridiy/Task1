@@ -1,6 +1,6 @@
-﻿namespace SweetTask
+﻿namespace SweetTask.Base
 {
-    enum CandyGlaze
+    public enum CandyGlaze
     {
         None,
         Chokolate,

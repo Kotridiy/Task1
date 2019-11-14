@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SweetTask
+namespace SweetTask.Base
 {
-    abstract class Sweet
+    public abstract class Sweet
     {
         public Guid Id { get; private set; }
         public float Weight { get; private set; }

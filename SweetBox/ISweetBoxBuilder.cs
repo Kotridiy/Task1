@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SweetTask
+namespace SweetTask.Base
 {
-    interface ISweetBoxBuilder
+    public interface ISweetBoxBuilder
     {
         SweetBox this[string name] { get; }
     }

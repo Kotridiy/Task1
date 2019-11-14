@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SweetTask
+namespace SweetTask.Base
 {
-    class Candy : Sweet
+    public class Candy : Sweet
     {
         public CandyFilling[] Fillings { get; private set; }
         public CandyGlaze Glaze { get; private set; }
@@ -47,8 +47,7 @@ namespace SweetTask
 
         internal override Sweet Clone()
         {
-            Candy clone = (Candy) base.Clone();
-            clone.Glaze = Glaze;
+            Candy clone = (Candy)MemberwiseClone();
             clone.Fillings = (CandyFilling[]) Fillings.Clone();
             return clone;
         }
