@@ -2,6 +2,9 @@
 
 namespace SweetTask.DemoBuilders
 {
+    /// <summary>
+    /// Sweet box builder. For testing only.
+    /// </summary>
     class DemoSweetBoxBulder : ISweetBoxBuilder
     {
         ISweetBuilder sweetBuilder;
@@ -29,8 +32,8 @@ namespace SweetTask.DemoBuilders
                         box.AddItem(sweetBuilder["Crazy Bee"], 8);
                         box.AddItem(sweetBuilder["Ромашка"], 5);
                         box.AddItem(sweetBuilder["Milk chocolate \"Nougat\""], 3);
-                        box.AddItem(sweetBuilder["Шоколад \"Белый\""], 1);   
-                        box.AddItem(sweetBuilder["Яшкино"], 1);   
+                        box.AddItem(sweetBuilder["Шоколад \"Белый\""]);   
+                        box.AddItem(sweetBuilder["Яшкино"]);   
                         break;
                     default:
                         box = null;

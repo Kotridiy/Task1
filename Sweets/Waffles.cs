@@ -24,7 +24,9 @@ namespace SweetTask.Base
 
         internal override Sweet Clone()
         {
-            return (Waffles)MemberwiseClone();
+            Waffles clone = (Waffles)MemberwiseClone();
+            clone.Id = Guid.NewGuid();
+            return clone;
         }
 
         public override string ToString()
@@ -32,6 +34,9 @@ namespace SweetTask.Base
             return base.ToString() + $", C = {WaffleCount}";
         }
 
+        /// <summary>
+        /// Print to console.
+        /// </summary>
         public override string ToPrint()
         {
             return base.ToString() + $", {WaffleCount} waffles";

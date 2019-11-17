@@ -4,9 +4,14 @@ namespace SweetTask.Base
 {
     public class Candy : Sweet
     {
+        /// <summary>
+        /// One or more candy bases and fillers.
+        /// </summary>
         public CandyFilling[] Fillings { get; private set; }
+        /// <summary>
+        /// Candy glaze.
+        /// </summary>
         public CandyGlaze Glaze { get; private set; }
-        //public CandySprinkle Sprinkle { get; }
 
         private Candy(string name, string country, float weight, float sugar,
             CandyGlaze glaze)
@@ -48,6 +53,7 @@ namespace SweetTask.Base
         internal override Sweet Clone()
         {
             Candy clone = (Candy)MemberwiseClone();
+            clone.Id = Guid.NewGuid();
             clone.Fillings = (CandyFilling[]) Fillings.Clone();
             return clone;
         }
@@ -56,21 +62,13 @@ namespace SweetTask.Base
         {
             return base.ToString();
         }
-        
+
+        /// <summary>
+        /// Print to console.
+        /// </summary>
         public override string ToPrint()
         {
             return base.ToString();
         }
     }
-
-    /*enum CandySprinkle
-    {
-        None,
-        CocoaPowder,
-        SugarPowder,
-        ChokolatePowder,
-        Nutes,
-        WaffelChips,
-        CoconutFlakes
-    }*/
 }

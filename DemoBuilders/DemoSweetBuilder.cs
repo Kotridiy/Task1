@@ -2,6 +2,9 @@
 
 namespace SweetTask.DemoBuilders
 {
+    /// <summary>
+    /// Sweets builder. For testing only.
+    /// </summary>
     class DemoSweetBuilder : ISweetBuilder
     {
         public Sweet this[string name]

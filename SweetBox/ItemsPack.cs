@@ -2,6 +2,7 @@
 
 namespace SweetTask.Base
 {
+    [Obsolete]
     class ItemsPack
     {
         private int count;

@@ -37,7 +37,9 @@ namespace SweetTask.Base
 
         internal override Sweet Clone()
         {
-            return (Chocolate)MemberwiseClone();
+            Chocolate clone = (Chocolate)MemberwiseClone();
+            clone.Id = Guid.NewGuid();
+            return clone;
         }
 
         public override string ToString()
@@ -45,6 +47,9 @@ namespace SweetTask.Base
             return base.ToString() + $", {Rows}X{Columns}";
         }
 
+        /// <summary>
+        /// Print to console.
+        /// </summary>
         public override string ToPrint()
         {
             return base.ToString() + $", {Rows}X{Columns} bars";
