@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SweetTask.Base
+﻿namespace SweetTask.BaseModel.Sweets
 {
     /// <summary>
     /// Defines indexator that allow get sweet by name.

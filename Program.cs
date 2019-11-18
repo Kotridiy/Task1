@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using SweetTask.Base;
-using SweetTask.DemoBuilders;
+﻿using SweetTask.DemoBuilders;
 using SweetTask.ConsoleManager;
 
 namespace SweetTask

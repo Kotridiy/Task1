@@ -1,6 +1,7 @@
 ﻿using System;
+using SweetTask.BaseModel.Sweets;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.SweetBox
 {
     [Obsolete]
     class ItemsPack

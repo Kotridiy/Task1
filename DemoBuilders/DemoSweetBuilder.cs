@@ -1,4 +1,5 @@
-﻿using SweetTask.Base;
+﻿using SweetTask.BaseModel.Enums;
+using SweetTask.BaseModel.Sweets;
 
 namespace SweetTask.DemoBuilders
 {

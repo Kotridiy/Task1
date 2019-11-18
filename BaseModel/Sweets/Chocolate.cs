@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SweetTask.BaseModel.Enums;
+using System;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.Sweets
 {
     public class Chocolate : Sweet
     {

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.Sweets
 {
     /// <summary>
     /// Class defines some sweet which can be put in sweet box. 

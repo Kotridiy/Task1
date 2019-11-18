@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SweetTask.BaseModel.Sweets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.SweetBox
 {
     /// <summary>
     /// Gift box with different types of sweets.

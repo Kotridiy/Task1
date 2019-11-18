@@ -1,5 +1,8 @@
 ﻿using System;
-using SweetTask.Base;
+using System.Collections.Generic;
+using SweetTask.BaseModel.Enums;
+using SweetTask.BaseModel.SweetBox;
+using SweetTask.BaseModel.Sweets;
 
 namespace SweetTask.ConsoleManager
 {
@@ -12,7 +15,8 @@ namespace SweetTask.ConsoleManager
             "1. Add sweet. \n" +
             "2. Remove sweet. \n" +
             "3. Print sweet box. \n" +
-            "4. End. \n";
+            "4. Create random candy \n" +
+            "5. End. \n";
 
         private SweetBox SweetBox { get; set; }
         private ISweetBuilder SweetBuilder { get; set; }
@@ -32,7 +36,7 @@ namespace SweetTask.ConsoleManager
                 Console.Clear();
                 Console.WriteLine("Sweet box: " + SweetBox.Name);
                 Console.Write(CreateBoxStr);
-                answer = ConsoleSweetBoxManager.GetKey(4);
+                answer = ConsoleSweetBoxManager.GetKey(5);
                 switch (answer)
                 {
                     case 1:
@@ -44,8 +48,11 @@ namespace SweetTask.ConsoleManager
                     case 3:
                         PrintSweetBox();
                         break;
+                    case 4:
+                        SweetBox.AddItem(CreateRandomCandy());
+                        break;
                 }
-            } while (answer != 4);
+            } while (answer != 5);
 
             return SweetBox;
         }
@@ -122,6 +129,43 @@ namespace SweetTask.ConsoleManager
                 Console.WriteLine("Sorry, this sweet don't exist. \nPress any key.");
                 Console.ReadKey();
             }
+        }
+
+        private Candy CreateRandomCandy()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter name of candy: ");
+            string name = Console.ReadLine();
+
+            Random random = new Random();
+            string[] countries = { "Russia", "Ukraine", "Belarus", "USA", "Lithuania", "Latvia", "Germania" };
+            string manufacturer = countries[random.Next(countries.Length)];
+            float weight = (float)(1 + random.NextDouble() * 100);
+            float sugar = (float)(random.NextDouble() * 100);
+
+            CandyGlaze glaze = (CandyGlaze)GetRandomEnum(typeof(CandyGlaze), random);
+
+            List<CandyFilling> fillings = new List<CandyFilling>();
+            int fillCount = random.Next(1, 4);
+            for (int i = 0; i < fillCount; i++)
+            {
+                fillings.Add((CandyFilling)GetRandomEnum(typeof(CandyFilling), random));
+            }
+
+            Candy candy = new Candy(name, manufacturer, weight, sugar, glaze, fillings.ToArray());
+
+            Console.Clear();
+            Console.WriteLine(candy.ToPrintFull());
+            Console.WriteLine("Press any key...");
+            Console.ReadKey(true);
+            return candy;
+        }
+
+        private object GetRandomEnum(Type T, Random random)
+        {
+            if (!T.IsEnum) throw new ArgumentException("Type must be enum.");
+            var values = Enum.GetValues(T);
+            return values.GetValue(random.Next(values.Length));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SweetTask.Base
+﻿namespace SweetTask.BaseModel.Enums
 {
     public enum ChocolateFilling
     {

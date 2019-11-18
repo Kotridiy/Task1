@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SweetTask.Base;
+﻿using SweetTask.BaseModel.SweetBox;
+using SweetTask.BaseModel.Sweets;
+using System;
 
 namespace SweetTask.ConsoleManager
 {

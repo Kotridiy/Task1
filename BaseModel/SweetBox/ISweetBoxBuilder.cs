@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.SweetBox
 {
     /// <summary>
     /// Defines indexator that allow get sweet box by name.

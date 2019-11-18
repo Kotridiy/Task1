@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SweetTask.BaseModel.Enums;
+using System;
+using System.Text;
 
-namespace SweetTask.Base
+namespace SweetTask.BaseModel.Sweets
 {
     public class Candy : Sweet
     {
@@ -69,6 +71,18 @@ namespace SweetTask.Base
         public override string ToPrint()
         {
             return base.ToString();
+        }
+
+        public string ToPrintFull()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine($"Candy name: {Name}");
+            builder.AppendLine($"Manufacturer country: {ManufactureCountry}");
+            builder.AppendLine($"Weight: {Weight}g");
+            builder.AppendLine($"Sugar: {Sugar}g/100g");
+            builder.AppendLine($"Glaze: {Glaze}");
+            builder.AppendLine($"Fillings: {String.Join(", ", Fillings)}");
+            return builder.ToString();
         }
     }
 }
